@@ -7,12 +7,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, MessageCircle, Instagram, Send } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Contact = () => {
   const ref = useRef(null);
+  const isMobile = useIsMobile();
   const isInView = useInView(ref, { 
     once: true, 
-    amount: 0.2,
+    amount: isMobile ? 0.1 : 0.2,
     margin: "0px 0px -100px 0px"
   });
   const { toast } = useToast();
@@ -118,15 +120,13 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            initial={{ opacity: 0, x: isMobile ? -20 : -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ 
-              duration: 0.7, 
-              type: "spring",
-              stiffness: 100,
-              damping: 15
+              duration: isMobile ? 0.4 : 0.6, 
+              ease: "easeOut"
             }}
-            className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 neon-ring backdrop-blur-md shadow-lg shadow-primary/5"
+            className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 backdrop-blur-sm"
           >
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="space-y-2">
@@ -216,17 +216,15 @@ const Contact = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            initial={{ opacity: 0, x: isMobile ? 20 : 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ 
-              duration: 0.7, 
-              type: "spring",
-              stiffness: 100,
-              damping: 15
+              duration: isMobile ? 0.4 : 0.6, 
+              ease: "easeOut"
             }}
             className="space-y-6"
           >
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 neon-ring backdrop-blur-md shadow-lg shadow-primary/5">
+            <div className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 backdrop-blur-sm">
               <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-gradient">Outras formas de contato</h3>
               
               <div className="space-y-4">

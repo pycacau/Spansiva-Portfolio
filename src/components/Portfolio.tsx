@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Portfolio = () => {
   const ref = useRef(null);
+  const isMobile = useIsMobile();
   const isInView = useInView(ref, { 
     once: true, 
-    amount: 0.2,
+    amount: isMobile ? 0.1 : 0.2,
     margin: "0px 0px -100px 0px"
   });
 
@@ -114,38 +116,29 @@ const Portfolio = () => {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ 
-                  duration: 0.7, 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15
+                  duration: isMobile ? 0.4 : 0.5, 
+                  delay: isMobile ? index * 0.05 : index * 0.08,
+                  ease: "easeOut"
                 }}
-                whileHover={{ y: -12, scale: 1.03, rotateY: 2 }}
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
-                className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-700 card-hover-glow glass-card cursor-pointer backdrop-blur-md shadow-xl shadow-primary/10 hover:shadow-primary/30"
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="group relative overflow-hidden rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 glass-card cursor-pointer backdrop-blur-sm"
+                whileHover={!isMobile ? { y: -4 } : {}}
                 role="article"
                 aria-label={`Produto: ${item.title}`}
               >
                 <div className="aspect-video overflow-hidden bg-gradient-to-br from-muted/80 via-muted/60 to-muted/40 relative">
                   {!imageError ? (
-                    <motion.img
+                    <img
                       src={item.image}
                       alt={`${item.title} - ${item.category}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
                       onError={() => setImageError(true)}
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.15 }}
-                      transition={{ 
-                        duration: 0.8, 
-                        ease: [0.25, 0.46, 0.45, 0.94]
-                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10">

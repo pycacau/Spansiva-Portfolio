@@ -106,6 +106,10 @@ All colors MUST be HSL.
     background-image: radial-gradient(hsl(0 0% 10%) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
+    /* Otimizações de performance para mobile */
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    will-change: scroll-position;
   }
 
   h1, h2, h3 {
@@ -145,7 +149,18 @@ All colors MUST be HSL.
   }
 
   .glass-card {
-    @apply bg-background/60 backdrop-blur-md border border-border;
+    @apply bg-background/60 backdrop-blur-sm border border-border;
+  }
+  
+  /* Otimizações para mobile */
+  @media (max-width: 768px) {
+    .glass-card {
+      @apply backdrop-blur-sm;
+    }
+    
+    .card-hover-glow:hover {
+      transform: none;
+    }
   }
 
   .neon-ring {

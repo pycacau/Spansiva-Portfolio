@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Award, Zap, ShieldCheck } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const About = () => {
   const ref = useRef(null);
+  const isMobile = useIsMobile();
   const isInView = useInView(ref, { 
     once: true, 
-    amount: 0.2,
+    amount: isMobile ? 0.1 : 0.2,
     margin: "0px 0px -100px 0px"
   });
 
@@ -55,21 +57,19 @@ const About = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              initial={{ opacity: 0, y: isMobile ? 20 : 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ 
-                duration: 0.7, 
-                delay: index * 0.15,
-                type: "spring",
-                stiffness: 100,
-                damping: 15
+                duration: isMobile ? 0.4 : 0.6, 
+                delay: isMobile ? index * 0.08 : index * 0.15,
+                ease: "easeOut"
               }}
-              className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-500 card-hover-glow h-full flex flex-col backdrop-blur-md shadow-lg shadow-primary/5 hover:shadow-primary/20"
-              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 h-full flex flex-col backdrop-blur-sm"
+              whileHover={!isMobile ? { y: -4 } : {}}
             >
               <div className="mb-5">
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 w-fit mb-5 shadow-lg shadow-primary/20 border border-primary/20 group-hover:shadow-primary/40 transition-all duration-300">
-                  <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-primary drop-shadow-lg" strokeWidth={2} />
+                <div className="p-4 rounded-xl bg-primary/10 w-fit mb-5 border border-primary/20 transition-colors duration-300">
+                  <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={2} />
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">{feature.title}</h3>
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
