@@ -27,6 +27,11 @@ const Testimonials = () => {
       text: "Melhor loja de produtos gamers! Atendimento impecável e produtos de primeira linha. Voltarei com certeza.",
       rating: 5,
     },
+    {
+      name: "Juliana P.",
+      text: "Serviço de recarga de cartuchos excelente! Economizei muito e a qualidade das impressões continua perfeita.",
+      rating: 5,
+    },
   ];
 
   return (
@@ -45,7 +50,7 @@ const Testimonials = () => {
           <p className="text-base sm:text-lg text-muted-foreground px-4 leading-relaxed font-light tracking-wide">Prova social para decidir hoje</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {items.map((t, i) => (
             <motion.div
               key={i}
@@ -56,16 +61,16 @@ const Testimonials = () => {
                 delay: isMobile ? i * 0.05 : i * 0.08,
                 ease: "easeOut"
               }}
-              className="glass-card-premium p-8 sm:p-10 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col card-hover-glow"
-              whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
+              className="glass-card-premium p-3 sm:p-5 lg:p-6 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col card-hover-glow"
+              whileHover={!isMobile ? { y: -4, scale: 1.02 } : {}}
             >
-              <div className="flex mb-4 gap-1">
+              <div className="flex mb-2 sm:mb-3 gap-0.5 flex-wrap">
                 {Array.from({ length: t.rating }).map((_, idx) => (
-                  <Star key={idx} className="w-5 h-5 sm:w-6 sm:h-6 text-primary fill-primary" />
+                  <Star key={idx} className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-primary fill-primary" />
                 ))}
               </div>
-              <p className="mb-6 text-base sm:text-lg text-foreground leading-relaxed flex-grow italic">"{t.text}"</p>
-              <p className="text-sm sm:text-base font-semibold text-foreground">{t.name}</p>
+              <p className="mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base text-foreground leading-relaxed flex-grow italic">"{t.text}"</p>
+              <p className="text-xs sm:text-sm font-semibold text-foreground">{t.name}</p>
             </motion.div>
           ))}
         </div>

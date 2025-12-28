@@ -58,7 +58,7 @@ const Services = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 xl:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -69,14 +69,14 @@ const Services = () => {
                 delay: isMobile ? index * 0.05 : index * 0.1,
                 ease: "easeOut"
               }}
-              className="glass-card-premium p-8 sm:p-10 rounded-2xl card-hover-glow group h-full flex flex-col"
+              className="glass-card-premium p-4 sm:p-6 lg:p-8 xl:p-10 rounded-xl sm:rounded-2xl card-hover-glow group h-full flex flex-col"
               whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
-              <div className="bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 border border-primary/30 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110">
-                <service.icon className="w-12 h-12 sm:w-14 sm:h-14 text-primary" strokeWidth={2.5} />
+              <div className="bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8 transition-all duration-300 border border-primary/30 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110">
+                <service.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-primary" strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight tracking-tight">{service.title}</h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed flex-grow font-light">{service.description}</p>
+              <h3 className="text-sm sm:text-base lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4 group-hover:text-primary transition-colors leading-tight tracking-tight">{service.title}</h3>
+              <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed flex-grow font-light">{service.description}</p>
             </motion.div>
           ))}
         </div>

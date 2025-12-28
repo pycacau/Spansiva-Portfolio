@@ -67,7 +67,7 @@ const Portfolio = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {portfolioItems.map((item, index) => {
             const [imageError, setImageError] = useState(false);
             const [isHovered, setIsHovered] = useState(false);
@@ -75,6 +75,13 @@ const Portfolio = () => {
             const [displayedTitle, setDisplayedTitle] = useState("");
             
             useEffect(() => {
+              if (isMobile) {
+                // Em mobile, sempre mostrar informações completas
+                setDisplayedCategory(item.category);
+                setDisplayedTitle(item.title);
+                return;
+              }
+
               if (isHovered) {
                 // Reset
                 setDisplayedCategory("");
@@ -111,7 +118,7 @@ const Portfolio = () => {
                 setDisplayedCategory("");
                 setDisplayedTitle("");
               }
-            }, [isHovered, item.category, item.title]);
+            }, [isHovered, item.category, item.title, isMobile]);
             
             return (
               <motion.div
@@ -123,8 +130,8 @@ const Portfolio = () => {
                   delay: isMobile ? index * 0.05 : index * 0.08,
                   ease: "easeOut"
                 }}
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
+                onHoverStart={() => !isMobile && setIsHovered(true)}
+                onHoverEnd={() => !isMobile && setIsHovered(false)}
                 className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 glass-card-premium cursor-pointer card-hover-glow"
                 whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
                 role="article"
@@ -149,22 +156,23 @@ const Portfolio = () => {
                     </div>
                   )}
                 </div>
-                <div className="absolute inset-0 flex items-end p-4 sm:p-6 pointer-events-none">
+                {/* Informações sempre visíveis em mobile, animadas em desktop */}
+                <div className="absolute inset-0 flex items-end p-3 sm:p-4 lg:p-6 pointer-events-none bg-gradient-to-t from-background/95 via-background/80 to-transparent">
                   <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+                    initial={isMobile ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+                    animate={isMobile || isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <p className="text-primary text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wide">
-                      {displayedCategory}
-                      {isHovered && displayedCategory.length < item.category.length && (
+                    <p className="text-primary text-xs font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
+                      {isMobile ? item.category : displayedCategory}
+                      {!isMobile && isHovered && displayedCategory.length < item.category.length && (
                         <span className="animate-pulse">|</span>
                       )}
                     </p>
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
-                      {displayedTitle}
-                      {isHovered && displayedTitle.length < item.title.length && (
+                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground line-clamp-2">
+                      {isMobile ? item.title : displayedTitle}
+                      {!isMobile && isHovered && displayedTitle.length < item.title.length && (
                         <span className="animate-pulse">|</span>
                       )}
                     </h3>

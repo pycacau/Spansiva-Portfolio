@@ -92,7 +92,21 @@ const Contact = () => {
     const body = encodeURIComponent(`Nome: ${formData.name}\nE-mail: ${formData.email}\n\nMensagem:\n${formData.message}`);
     const emailUrl = `mailto:spansivainformatica@gmail.com?subject=${subject}&body=${body}`;
     
-    window.location.href = emailUrl;
+    // Tenta abrir o cliente de email padrão
+    // Se não funcionar, oferece alternativas
+    try {
+      // Cria um link temporário e clica nele para garantir compatibilidade
+      const link = document.createElement('a');
+      link.href = emailUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      // Fallback: usa window.location
+      window.location.href = emailUrl;
+    }
     
     toast({
       title: "Abrindo cliente de e-mail",

@@ -472,4 +472,24 @@ All colors MUST be HSL.
       linear-gradient(135deg, transparent 0%, hsl(var(--primary) / 0.02) 50%, transparent 100%);
     pointer-events: none;
   }
+
+  /* Brands carousel animation */
+  @keyframes brands-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .brands-carousel {
+    animation: brands-scroll 12s linear infinite;
+    width: fit-content;
+    display: flex;
+  }
+
+  .brands-carousel:hover {
+    animation-play-state: paused;
+  }
 }
