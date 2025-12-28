@@ -32,10 +32,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden overflow-x-hidden max-w-full">
       <CodeBackground />
       <Navigation />
-      <div className="relative z-[2]">
+      <div className="relative z-[2] overflow-x-hidden max-w-full">
         <Hero />
         <About />
         <Services />
@@ -49,13 +49,13 @@ const Index = () => {
         href="https://wa.me/558898033002"
         target="_blank"
         rel="noopener noreferrer"
-        className={`fixed right-4 sm:right-6 md:right-8 z-[90] flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-primary text-primary-foreground shadow-lg neon-ring hover:scale-105 transition-all duration-300 text-sm sm:text-base hover:shadow-primary/50 tech-glow ${
+        className={`fixed right-4 sm:right-6 md:right-8 z-[90] flex items-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-full bg-green-600 hover:bg-green-700 text-white shadow-2xl hover:shadow-green-500/50 transition-all duration-300 text-sm sm:text-base font-semibold tracking-wide hover:scale-110 hover:-translate-y-1 ${
           isFooterVisible ? 'bottom-24 sm:bottom-28 md:bottom-32' : 'bottom-4 sm:bottom-6 md:bottom-8'
         }`}
         aria-label="Fale agora pelo WhatsApp"
       >
         <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-        <span className="hidden sm:block font-semibold">Fale agora</span>
+        <span className="hidden sm:block">Fale agora</span>
       </a>
     </div>
   );

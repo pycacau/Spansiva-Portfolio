@@ -48,7 +48,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-light tracking-wide px-4"
           >
             PCs gamer, impressoras e acessórios premium. Tudo que você precisa para elevar sua experiência gaming ao próximo nível.
           </motion.p>
@@ -62,7 +62,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               onClick={() => scrollToSection("services")} 
-              className="text-lg sm:text-xl px-8 py-6 neon-ring w-full sm:w-auto hover:scale-105 transition-transform tech-glow font-semibold"
+              className="text-lg sm:text-xl px-10 py-7 btn-premium w-full sm:w-auto font-semibold tracking-wide shadow-2xl"
             >
               Ver Produtos
             </Button>
@@ -70,7 +70,7 @@ const Hero = () => {
               size="lg" 
               variant="outline" 
               onClick={() => scrollToSection("contact")} 
-              className="text-lg sm:text-xl px-8 py-6 neon-ring w-full sm:w-auto hover:scale-105 transition-transform border-2 font-semibold"
+              className="text-lg sm:text-xl px-10 py-7 neon-ring w-full sm:w-auto border-2 font-semibold tracking-wide bg-background/50 backdrop-blur-sm hover:bg-background/70"
             >
               Fale conosco
             </Button>

@@ -48,7 +48,7 @@ const About = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">
             Sobre a <span className="text-gradient">Spansiva</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4 leading-relaxed font-light tracking-wide">
             Somos uma loja especializada em produtos gamers, oferecendo PCs de alta performance, impressoras profissionais e os melhores acessórios para sua experiência gaming. Com foco em qualidade, performance e atendimento personalizado, temos tudo que você precisa para montar o setup dos seus sonhos.
           </p>
         </motion.div>
@@ -64,15 +64,15 @@ const About = () => {
                 delay: isMobile ? index * 0.08 : index * 0.15,
                 ease: "easeOut"
               }}
-              className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 h-full flex flex-col backdrop-blur-sm"
-              whileHover={!isMobile ? { y: -4 } : {}}
+              className="glass-card-premium p-8 sm:p-10 rounded-2xl card-hover-glow h-full flex flex-col group"
+              whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
-              <div className="mb-5">
-                <div className="p-4 rounded-xl bg-primary/10 w-fit mb-5 border border-primary/20 transition-colors duration-300">
-                  <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={2} />
+              <div className="mb-6">
+                <div className="p-5 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-fit mb-6 border border-primary/30 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20">
+                  <feature.icon className="w-12 h-12 sm:w-14 sm:h-14 text-primary" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">{feature.title}</h3>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 group-hover:text-primary transition-colors tracking-tight">{feature.title}</h3>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light">{feature.description}</p>
               </div>
             </motion.div>
           ))}

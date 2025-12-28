@@ -53,7 +53,7 @@ const Services = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Nossos <span className="text-gradient">Produtos</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 leading-relaxed font-light tracking-wide">
             Soluções completas em tecnologia e informática
           </p>
         </motion.div>
@@ -69,14 +69,14 @@ const Services = () => {
                 delay: isMobile ? index * 0.05 : index * 0.1,
                 ease: "easeOut"
               }}
-              className="glass-card p-6 sm:p-8 rounded-2xl hover:border-primary/60 transition-all duration-300 card-hover-glow group h-full flex flex-col backdrop-blur-md border border-primary/20 hover:border-primary/40"
-              whileHover={!isMobile ? { y: -4 } : {}}
+              className="glass-card-premium p-8 sm:p-10 rounded-2xl card-hover-glow group h-full flex flex-col"
+              whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
-              <div className="bg-primary/10 w-20 h-20 sm:w-24 sm:h-24 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 border border-primary/20">
-                <service.icon className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={2} />
+              <div className="bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 border border-primary/30 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110">
+                <service.icon className="w-12 h-12 sm:w-14 sm:h-14 text-primary" strokeWidth={2.5} />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">{service.title}</h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed flex-grow">{service.description}</p>
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight tracking-tight">{service.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed flex-grow font-light">{service.description}</p>
             </motion.div>
           ))}
         </div>

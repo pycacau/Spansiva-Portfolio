@@ -42,7 +42,7 @@ const Testimonials = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">O que nossos clientes dizem</h2>
-          <p className="text-base sm:text-lg text-muted-foreground px-4">Prova social para decidir hoje</p>
+          <p className="text-base sm:text-lg text-muted-foreground px-4 leading-relaxed font-light tracking-wide">Prova social para decidir hoje</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -56,8 +56,8 @@ const Testimonials = () => {
                 delay: isMobile ? i * 0.05 : i * 0.08,
                 ease: "easeOut"
               }}
-              className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 h-full flex flex-col backdrop-blur-sm"
-              whileHover={!isMobile ? { y: -4 } : {}}
+              className="glass-card-premium p-8 sm:p-10 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col card-hover-glow"
+              whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
               <div className="flex mb-4 gap-1">
                 {Array.from({ length: t.rating }).map((_, idx) => (

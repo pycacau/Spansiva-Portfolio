@@ -24,8 +24,10 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-primary/20" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        isScrolled 
+          ? "bg-background/90 backdrop-blur-xl border-b border-primary/30 shadow-lg shadow-primary/5" 
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between">
@@ -71,7 +73,7 @@ const Navigation = () => {
             onClick={() => scrollToSection("contact")} 
             variant="default" 
             size="sm" 
-            className="neon-ring text-sm hover:scale-105 transition-transform tech-glow"
+            className="btn-premium text-sm font-semibold tracking-wide shadow-lg"
           >
             <Phone className="w-4 h-4 mr-1 xl:mr-2" /> <span className="hidden xl:inline">Contato</span>
           </Button>
@@ -118,7 +120,7 @@ const Navigation = () => {
             <Button 
               onClick={() => scrollToSection("contact")} 
               variant="default" 
-              className="w-full neon-ring tech-glow hover:scale-105 transition-transform"
+              className="w-full btn-premium font-semibold tracking-wide shadow-lg"
             >
               <Phone className="w-4 h-4 mr-2" /> Contato
             </Button>

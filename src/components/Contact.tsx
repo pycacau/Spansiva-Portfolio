@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MessageCircle, Instagram, Send } from "lucide-react";
+import { Mail, MessageCircle, Instagram } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Contact = () => {
@@ -24,18 +24,13 @@ const Contact = () => {
     message: "",
   });
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Reset errors
+  const validateForm = () => {
     const newErrors: { name?: string; email?: string; message?: string } = {};
     
     // Validation
@@ -58,9 +53,11 @@ const Contact = () => {
     }
     
     setErrors(newErrors);
-    
-    if (Object.keys(newErrors).length > 0) {
-      setIsSubmitting(false);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const sendToWhatsApp = () => {
+    if (!validateForm()) {
       toast({
         title: "Erro de validação",
         description: "Por favor, corrija os campos destacados.",
@@ -68,17 +65,39 @@ const Contact = () => {
       });
       return;
     }
+
+    const message = `Olá! Gostaria de fazer um pedido:\n\n*Nome:* ${formData.name}\n*E-mail:* ${formData.email}\n*Mensagem:* ${formData.message}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/558898033002?text=${encodedMessage}`;
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    window.open(whatsappUrl, '_blank');
     
     toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em breve.",
+      title: "Redirecionando para WhatsApp",
+      description: "Você será redirecionado para o WhatsApp.",
     });
-    setFormData({ name: "", email: "", message: "" });
-    setErrors({});
-    setIsSubmitting(false);
+  };
+
+  const sendToEmail = () => {
+    if (!validateForm()) {
+      toast({
+        title: "Erro de validação",
+        description: "Por favor, corrija os campos destacados.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const subject = encodeURIComponent(`Pedido de ${formData.name}`);
+    const body = encodeURIComponent(`Nome: ${formData.name}\nE-mail: ${formData.email}\n\nMensagem:\n${formData.message}`);
+    const emailUrl = `mailto:spansivainformatica@gmail.com?subject=${subject}&body=${body}`;
+    
+    window.location.href = emailUrl;
+    
+    toast({
+      title: "Abrindo cliente de e-mail",
+      description: "Seu cliente de e-mail será aberto.",
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -97,7 +116,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-card via-background/95 to-background relative overflow-hidden" aria-label="Entre em contato">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-card via-background/95 to-background relative overflow-hidden" aria-label="Faça o seu pedido">
       <div className="absolute inset-0 tech-grid opacity-20"></div>
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -111,10 +130,10 @@ const Contact = () => {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">
-            Entre em <span className="text-gradient">Contato</span>
+            Faça o seu <span className="text-gradient">Pedido</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-            Tire suas dúvidas ou solicite um orçamento
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 leading-relaxed font-light tracking-wide">
+            Preencha o formulário e envie seu pedido
           </p>
         </motion.div>
 
@@ -126,9 +145,9 @@ const Contact = () => {
               duration: isMobile ? 0.4 : 0.6, 
               ease: "easeOut"
             }}
-            className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 backdrop-blur-sm"
+            className="glass-card-premium p-8 sm:p-10 rounded-2xl"
           >
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-6" noValidate>
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium">
                   Nome <span className="text-destructive">*</span>
@@ -195,23 +214,26 @@ const Contact = () => {
                   </p>
                 )}
               </div>
-              <Button 
-                type="submit" 
-                size="lg" 
-                className="w-full neon-ring" 
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="mr-2">Enviando...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Enviar Mensagem
-                  </>
-                )}
-              </Button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Button 
+                  type="button" 
+                  size="lg" 
+                  className="w-full bg-green-600 hover:bg-green-700 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" 
+                  onClick={sendToWhatsApp}
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Enviar via WhatsApp
+                </Button>
+                <Button 
+                  type="button" 
+                  size="lg" 
+                  className="w-full btn-premium font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" 
+                  onClick={sendToEmail}
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Enviar via E-mail
+                </Button>
+              </div>
             </form>
           </motion.div>
 
@@ -224,7 +246,7 @@ const Contact = () => {
             }}
             className="space-y-6"
           >
-            <div className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 backdrop-blur-sm">
+            <div className="glass-card-premium p-8 sm:p-10 rounded-2xl">
               <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-gradient">Outras formas de contato</h3>
               
               <div className="space-y-4">
@@ -232,7 +254,7 @@ const Contact = () => {
                   href="https://wa.me/558898033002"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
                 >
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />
@@ -247,7 +269,7 @@ const Contact = () => {
                   href="https://instagram.com/spansiva_tec.aplicada"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
                 >
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />
@@ -260,7 +282,7 @@ const Contact = () => {
 
                 <a
                   href="mailto:spansivainformatica@gmail.com"
-                  className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
                 >
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />

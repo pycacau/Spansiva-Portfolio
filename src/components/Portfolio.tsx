@@ -62,7 +62,7 @@ const Portfolio = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">
             Produtos em <span className="text-gradient">Destaque</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 leading-relaxed font-light tracking-wide">
             Confira alguns dos nossos produtos gamers mais populares
           </p>
         </motion.div>
@@ -125,8 +125,8 @@ const Portfolio = () => {
                 }}
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
-                className="group relative overflow-hidden rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 glass-card cursor-pointer backdrop-blur-sm"
-                whileHover={!isMobile ? { y: -4 } : {}}
+                className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 glass-card-premium cursor-pointer card-hover-glow"
+                whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
                 role="article"
                 aria-label={`Produto: ${item.title}`}
               >
