@@ -1,6 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const Partners = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true, 
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  });
   const brands = [
     { 
       name: "NVIDIA", 
@@ -56,8 +63,13 @@ const Partners = () => {
     <section className="py-16 sm:py-20 bg-background relative overflow-hidden" id="partners" aria-label="Marcas parceiras">
       <div className="absolute inset-0 tech-grid opacity-30"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8 sm:mb-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+          className="text-center mb-8 sm:mb-10"
+        >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold px-4">Marcas parceiras</h2>
           <p className="text-sm sm:text-base text-muted-foreground px-4">Hardware e periféricos de alto desempenho</p>
         </motion.div>
@@ -66,11 +78,16 @@ const Partners = () => {
           {brands.map((brand, i) => (
             <motion.div
               key={brand.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="glass-card rounded-xl p-6 sm:p-8 text-center border border-border hover:border-primary transition-all duration-300 card-hover-glow flex items-center justify-center min-h-[120px] bg-background/60 backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.5, 
+                delay: i * 0.05,
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
+              className="glass-card rounded-2xl p-6 sm:p-8 text-center border border-primary/20 hover:border-primary/60 transition-all duration-500 card-hover-glow flex items-center justify-center min-h-[120px] bg-background/60 backdrop-blur-sm shadow-lg shadow-primary/5 hover:shadow-primary/20"
               whileHover={{ scale: 1.08, y: -4 }}
             >
               <img 

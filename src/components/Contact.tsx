@@ -10,7 +10,11 @@ import { Mail, MessageCircle, Instagram, Send } from "lucide-react";
 
 const Contact = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+    once: true, 
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  });
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -91,10 +95,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-background relative overflow-hidden" aria-label="Entre em contato">
-      <div className="absolute inset-0 tech-grid opacity-30"></div>
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-card via-background/95 to-background relative overflow-hidden" aria-label="Entre em contato">
+      <div className="absolute inset-0 tech-grid opacity-20"></div>
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -113,10 +118,15 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 neon-ring"
+            initial={{ opacity: 0, x: -50, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            transition={{ 
+              duration: 0.7, 
+              type: "spring",
+              stiffness: 100,
+              damping: 15
+            }}
+            className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 neon-ring backdrop-blur-md shadow-lg shadow-primary/5"
           >
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="space-y-2">
@@ -206,17 +216,22 @@ const Contact = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            transition={{ 
+              duration: 0.7, 
+              type: "spring",
+              stiffness: 100,
+              damping: 15
+            }}
             className="space-y-6"
           >
-            <div className="glass-card p-6 sm:p-8 rounded-xl border border-primary/20 neon-ring">
+            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 neon-ring backdrop-blur-md shadow-lg shadow-primary/5">
               <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-gradient">Outras formas de contato</h3>
               
               <div className="space-y-4">
                 <a
-                  href="https://wa.me/5511999999999"
+                  href="https://wa.me/558898033002"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
@@ -226,12 +241,12 @@ const Contact = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-base sm:text-lg font-semibold text-foreground">WhatsApp</p>
-                    <p className="text-sm text-muted-foreground">Atendimento rápido</p>
+                    <p className="text-sm text-muted-foreground">+55 88 9803-3002</p>
                   </div>
                 </a>
 
                 <a
-                  href="https://instagram.com/spansiva"
+                  href="https://instagram.com/spansiva_tec.aplicada"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
@@ -241,12 +256,12 @@ const Contact = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-base sm:text-lg font-semibold text-foreground">Instagram</p>
-                    <p className="text-sm text-muted-foreground">@spansiva</p>
+                    <p className="text-sm text-muted-foreground">@spansiva_tec.aplicada</p>
                   </div>
                 </a>
 
                 <a
-                  href="mailto:contato@spansiva.com"
+                  href="mailto:spansivainformatica@gmail.com"
                   className="flex items-center gap-4 p-5 bg-background/80 rounded-xl border border-primary/30 hover:border-primary transition-all duration-300 card-hover-glow group backdrop-blur-sm"
                 >
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -254,7 +269,7 @@ const Contact = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-base sm:text-lg font-semibold text-foreground">E-mail</p>
-                    <p className="text-sm text-muted-foreground break-all">contato@spansiva.com</p>
+                    <p className="text-sm text-muted-foreground break-all">spansivainformatica@gmail.com</p>
                   </div>
                 </a>
               </div>

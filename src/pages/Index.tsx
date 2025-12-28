@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,6 +12,25 @@ import Partners from "@/components/Partners";
 import CodeBackground from "@/components/CodeBackground";
 
 const Index = () => {
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector('footer');
+      if (footer) {
+        const rect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Se o footer está visível na tela (dentro de 200px do bottom)
+        setIsFooterVisible(rect.top < windowHeight - 200);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check inicial
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <CodeBackground />
@@ -26,10 +46,12 @@ const Index = () => {
         <Footer />
       </div>
       <a
-        href="https://wa.me/5511999999999"
+        href="https://wa.me/558898033002"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-[100] flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-primary text-primary-foreground shadow-lg neon-ring hover:scale-105 transition-all duration-300 text-sm sm:text-base hover:shadow-primary/50 tech-glow"
+        className={`fixed right-4 sm:right-6 md:right-8 z-[90] flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-primary text-primary-foreground shadow-lg neon-ring hover:scale-105 transition-all duration-300 text-sm sm:text-base hover:shadow-primary/50 tech-glow ${
+          isFooterVisible ? 'bottom-24 sm:bottom-28 md:bottom-32' : 'bottom-4 sm:bottom-6 md:bottom-8'
+        }`}
         aria-label="Fale agora pelo WhatsApp"
       >
         <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />

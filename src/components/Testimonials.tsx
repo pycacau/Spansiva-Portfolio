@@ -1,7 +1,14 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Star } from "lucide-react";
 
 const Testimonials = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true, 
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  });
   const items = [
     {
       name: "Carlos M.",
@@ -25,8 +32,13 @@ const Testimonials = () => {
       <div className="absolute inset-0 tech-grid opacity-30"></div>
       <div className="absolute top-0 right-1/3 w-56 h-56 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">O que nossos clientes dizem</h2>
           <p className="text-base sm:text-lg text-muted-foreground px-4">Prova social para decidir hoje</p>
         </motion.div>
@@ -35,12 +47,17 @@ const Testimonials = () => {
           {items.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass-card p-6 sm:p-8 rounded-lg border border-border hover:border-primary transition-all duration-300 card-hover-glow h-full flex flex-col"
-              whileHover={{ y: -4 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ 
+                duration: 0.6, 
+                delay: i * 0.1,
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
+              className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-500 card-hover-glow h-full flex flex-col backdrop-blur-md shadow-lg shadow-primary/5 hover:shadow-primary/20"
+              whileHover={{ y: -8, scale: 1.02 }}
             >
               <div className="flex mb-4 gap-1">
                 {Array.from({ length: t.rating }).map((_, idx) => (

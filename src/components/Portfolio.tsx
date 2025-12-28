@@ -1,49 +1,54 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const Portfolio = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+    once: true, 
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  });
 
   const portfolioItems = [
     {
-      title: "PC Gamer RTX 4090",
+      title: "Cadeira Gamer FOX Racer",
+      category: "Acessórios",
+      image: "/IMG_0440.jpg",
+    },
+    {
+      title: "Notebook Samsung",
+      category: "Notebooks",
+      image: "/IMG_0453.jpg",
+    },
+    {
+      title: "Headphones JBL",
+      category: "Acessórios",
+      image: "/IMG_0454.jpg",
+    },
+    {
+      title: "Gabinete PC Preto",
       category: "PCs Gamer",
-      image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&q=80",
+      image: "/IMG_0465.jpg",
     },
     {
-      title: "Impressora Multifuncional",
-      category: "Impressoras",
-      image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&q=80",
-    },
-    {
-      title: "Teclado Mecânico RGB",
-      category: "Acessórios",
-      image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80",
-    },
-    {
-      title: "Setup Gamer Completo",
+      title: "Gabinete PC Branco",
       category: "PCs Gamer",
-      image: "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800&q=80",
+      image: "/IMG_0467.jpg",
     },
     {
-      title: "Headset Gamer Pro",
-      category: "Acessórios",
-      image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=800&q=80",
-    },
-    {
-      title: "Monitor 4K 144Hz",
-      category: "Acessórios",
-      image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&q=80",
+      title: "Monitores ALLTEK",
+      category: "Monitores",
+      image: "/IMG_0469.jpg",
     },
   ];
 
   return (
-    <section id="portfolio" className="py-16 sm:py-20 md:py-24 bg-card relative overflow-hidden" aria-label="Produtos em destaque">
-      <div className="absolute inset-0 tech-grid opacity-30"></div>
-      <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+    <section id="portfolio" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-card via-card/95 to-background relative overflow-hidden" aria-label="Produtos em destaque">
+      <div className="absolute inset-0 tech-grid opacity-20"></div>
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -61,33 +66,120 @@ const Portfolio = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {portfolioItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-lg border border-border hover:border-primary transition-all duration-300 card-hover-glow glass-card cursor-pointer"
-              role="article"
-              aria-label={`Produto: ${item.title}`}
-            >
-              <div className="aspect-video overflow-hidden bg-muted">
-                <img
-                  src={item.image}
-                  alt={`${item.title} - ${item.category}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <div>
-                  <p className="text-primary text-sm font-semibold mb-1">{item.category}</p>
-                  <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
+          {portfolioItems.map((item, index) => {
+            const [imageError, setImageError] = useState(false);
+            const [isHovered, setIsHovered] = useState(false);
+            const [displayedCategory, setDisplayedCategory] = useState("");
+            const [displayedTitle, setDisplayedTitle] = useState("");
+            
+            useEffect(() => {
+              if (isHovered) {
+                // Reset
+                setDisplayedCategory("");
+                setDisplayedTitle("");
+                
+                // Type category
+                let categoryIndex = 0;
+                const categoryInterval = setInterval(() => {
+                  if (categoryIndex < item.category.length) {
+                    setDisplayedCategory(item.category.substring(0, categoryIndex + 1));
+                    categoryIndex++;
+                  } else {
+                    clearInterval(categoryInterval);
+                    
+                    // Type title after category
+                    setTimeout(() => {
+                      let titleIndex = 0;
+                      const titleInterval = setInterval(() => {
+                        if (titleIndex < item.title.length) {
+                          setDisplayedTitle(item.title.substring(0, titleIndex + 1));
+                          titleIndex++;
+                        } else {
+                          clearInterval(titleInterval);
+                        }
+                      }, 30);
+                    }, 200);
+                  }
+                }, 50);
+                
+                return () => {
+                  clearInterval(categoryInterval);
+                };
+              } else {
+                setDisplayedCategory("");
+                setDisplayedTitle("");
+              }
+            }, [isHovered, item.category, item.title]);
+            
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ 
+                  duration: 0.7, 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15
+                }}
+                whileHover={{ y: -12, scale: 1.03, rotateY: 2 }}
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
+                className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-700 card-hover-glow glass-card cursor-pointer backdrop-blur-md shadow-xl shadow-primary/10 hover:shadow-primary/30"
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                role="article"
+                aria-label={`Produto: ${item.title}`}
+              >
+                <div className="aspect-video overflow-hidden bg-gradient-to-br from-muted/80 via-muted/60 to-muted/40 relative">
+                  {!imageError ? (
+                    <motion.img
+                      src={item.image}
+                      alt={`${item.title} - ${item.category}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      onError={() => setImageError(true)}
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ 
+                        duration: 0.8, 
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10">
+                      <div className="text-center p-4">
+                        <p className="text-primary text-sm font-semibold mb-2">{item.title}</p>
+                        <p className="text-muted-foreground text-xs">{item.category}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="absolute inset-0 flex items-end p-4 sm:p-6 pointer-events-none">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full"
+                  >
+                    <p className="text-primary text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wide">
+                      {displayedCategory}
+                      {isHovered && displayedCategory.length < item.category.length && (
+                        <span className="animate-pulse">|</span>
+                      )}
+                    </p>
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
+                      {displayedTitle}
+                      {isHovered && displayedTitle.length < item.title.length && (
+                        <span className="animate-pulse">|</span>
+                      )}
+                    </h3>
+                  </motion.div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
