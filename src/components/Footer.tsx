@@ -84,9 +84,9 @@ const Footer = () => {
                 <li>
                   <a 
                     href="/termos" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <FileText className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <FileText className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10 flex-shrink-0" />
                     <span className="relative z-10">Termos de Uso</span>
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
@@ -94,9 +94,9 @@ const Footer = () => {
                 <li>
                   <a 
                     href="/faq" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10 flex-shrink-0" />
                     <span className="relative z-10">Perguntas Frequentes</span>
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
@@ -113,9 +113,9 @@ const Footer = () => {
                     href="https://wa.me/558898033002" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10 flex-shrink-0" />
                     <span className="relative z-10">+55 88 9803-3002</span>
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
@@ -123,7 +123,7 @@ const Footer = () => {
                 <li>
                   <a 
                     href="mailto:spansivainformatica@gmail.com" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group break-all relative"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center sm:justify-start gap-2 group break-all relative"
                   >
                     <Mail className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 relative z-10" />
                     <span className="text-xs relative z-10">spansivainformatica@gmail.com</span>
@@ -135,9 +135,9 @@ const Footer = () => {
                     href="https://instagram.com/spansiva_tec.aplicada" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 inline-flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10 flex-shrink-0" />
                     <span className="relative z-10">@spansiva_tec.aplicada</span>
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>

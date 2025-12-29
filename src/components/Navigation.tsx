@@ -22,6 +22,18 @@ const Navigation = () => {
     }
   };
 
+  // Prevenir scroll do body quando menu está aberto
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
@@ -81,8 +93,9 @@ const Navigation = () => {
 
       {/* Mobile Menu Button */}
       <button 
-        className="lg:hidden text-foreground hover:text-primary transition-all duration-300 p-2 rounded-lg hover:bg-primary/10 relative z-10" 
+        className="lg:hidden text-foreground hover:text-primary transition-all duration-300 p-2 rounded-lg hover:bg-primary/10 relative z-[101]" 
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
       >
         {isMobileMenuOpen ? <X size={24} className="animate-fade-in" /> : <Menu size={24} />}
       </button>
@@ -93,13 +106,19 @@ const Navigation = () => {
         <div 
           className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[99] animate-fade-in"
           onClick={() => setIsMobileMenuOpen(false)}
+          onTouchStart={(e) => {
+            // Prevenir que o toque no overlay feche o menu acidentalmente
+            if (e.target === e.currentTarget) {
+              setIsMobileMenuOpen(false);
+            }
+          }}
         />
       )}
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-[100] animate-fade-in-up">
-          <div className="relative mx-4 mt-20 mb-4 rounded-2xl overflow-hidden"
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-[100] animate-fade-in-up pointer-events-none">
+          <div className="relative mx-4 mt-20 mb-4 rounded-2xl overflow-hidden pointer-events-auto"
             style={{
               background: `
                 linear-gradient(135deg, 
