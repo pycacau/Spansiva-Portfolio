@@ -62,17 +62,20 @@ const Hero = () => {
             <Button 
               size="lg" 
               onClick={() => scrollToSection("services")} 
-              className="text-lg sm:text-xl px-10 py-7 btn-premium w-full sm:w-auto font-semibold tracking-wide shadow-2xl"
+              className="text-lg sm:text-xl px-10 py-7 btn-premium w-full sm:w-auto font-semibold tracking-wide shadow-2xl hover:shadow-[0_8px_40px_hsl(var(--primary)/0.5)] transition-all duration-300 group relative overflow-hidden"
             >
-              Ver Produtos
+              <span className="relative z-10 flex items-center gap-2">
+                Ver Produtos
+              </span>
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               onClick={() => scrollToSection("contact")} 
-              className="text-lg sm:text-xl px-10 py-7 neon-ring w-full sm:w-auto border-2 font-semibold tracking-wide bg-background/50 backdrop-blur-sm hover:bg-background/70"
+              className="text-lg sm:text-xl px-10 py-7 neon-ring w-full sm:w-auto border-2 font-semibold tracking-wide bg-gradient-to-br from-background/80 via-background/70 to-background/80 backdrop-blur-xl hover:from-background/90 hover:via-background/85 hover:to-background/90 transition-all duration-300 group relative overflow-hidden"
             >
-              Fale conosco
+              <span className="relative z-10">Fale conosco</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
             </Button>
           </motion.div>
 
@@ -86,10 +89,11 @@ const Hero = () => {
         >
           <button 
             onClick={() => scrollToSection("about")} 
-            className="animate-bounce hover:scale-110 transition-transform p-3 rounded-full bg-background/70 backdrop-blur-md border-2 border-primary/40 hover:border-primary shadow-lg hover:shadow-primary/50"
+            className="animate-bounce hover:scale-110 transition-all duration-300 p-3 rounded-full bg-gradient-to-br from-background/80 via-background/70 to-background/80 backdrop-blur-xl border-2 border-primary/40 hover:border-primary/70 shadow-lg hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] group relative overflow-hidden"
             aria-label="Rolar para baixo"
           >
-            <ChevronDown size={28} className="text-primary" />
+            <ChevronDown size={28} className="text-primary relative z-10 group-hover:scale-110 transition-transform" />
+            <div className="absolute inset-0 bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
         </motion.div>
       </div>

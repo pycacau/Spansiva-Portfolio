@@ -137,6 +137,7 @@ const Portfolio = () => {
                 role="article"
                 aria-label={`Produto: ${item.title}`}
               >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/3 group-hover:to-primary/5 transition-all duration-300 pointer-events-none z-10"></div>
                 <div className="aspect-video overflow-hidden bg-gradient-to-br from-muted/80 via-muted/60 to-muted/40 relative">
                   {!imageError ? (
                     <img

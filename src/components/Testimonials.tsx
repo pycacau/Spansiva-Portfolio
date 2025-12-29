@@ -61,16 +61,20 @@ const Testimonials = () => {
                 delay: isMobile ? i * 0.05 : i * 0.08,
                 ease: "easeOut"
               }}
-              className="glass-card-premium p-3 sm:p-5 lg:p-6 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col card-hover-glow"
+              className="glass-card-premium p-3 sm:p-5 lg:p-6 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col card-hover-glow group relative overflow-hidden"
               whileHover={!isMobile ? { y: -4, scale: 1.02 } : {}}
             >
-              <div className="flex mb-2 sm:mb-3 gap-0.5 flex-wrap">
-                {Array.from({ length: t.rating }).map((_, idx) => (
-                  <Star key={idx} className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-primary fill-primary" />
-                ))}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/3 group-hover:to-primary/5 transition-all duration-300 pointer-events-none"></div>
+              <div className="relative z-10">
+                <div className="flex mb-2 sm:mb-3 gap-0.5 flex-wrap">
+                  {Array.from({ length: t.rating }).map((_, idx) => (
+                    <Star key={idx} className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-primary fill-primary group-hover:scale-110 transition-transform duration-300" style={{ transitionDelay: `${idx * 50}ms` }} />
+                  ))}
+                </div>
+                <p className="mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base text-foreground leading-relaxed flex-grow italic group-hover:text-foreground/90 transition-colors duration-300">"{t.text}"</p>
+                <p className="text-xs sm:text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{t.name}</p>
               </div>
-              <p className="mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base text-foreground leading-relaxed flex-grow italic">"{t.text}"</p>
-              <p className="text-xs sm:text-sm font-semibold text-foreground">{t.name}</p>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </div>

@@ -64,16 +64,19 @@ const About = () => {
                 delay: isMobile ? index * 0.08 : index * 0.15,
                 ease: "easeOut"
               }}
-              className="glass-card-premium p-8 sm:p-10 rounded-2xl card-hover-glow h-full flex flex-col group"
+              className="glass-card-premium p-8 sm:p-10 rounded-2xl card-hover-glow h-full flex flex-col group relative overflow-hidden"
               whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
-              <div className="mb-6">
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-fit mb-6 border border-primary/30 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20">
-                  <feature.icon className="w-12 h-12 sm:w-14 sm:h-14 text-primary" strokeWidth={2.5} />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/3 group-hover:to-primary/5 transition-all duration-300 pointer-events-none"></div>
+              <div className="mb-6 relative z-10">
+                <div className="p-5 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-fit mb-6 border border-primary/30 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <feature.icon className="w-12 h-12 sm:w-14 sm:h-14 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4 group-hover:text-primary transition-colors tracking-tight">{feature.title}</h3>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light">{feature.description}</p>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight">{feature.title}</h3>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light group-hover:text-foreground/90 transition-colors duration-300">{feature.description}</p>
               </div>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </div>

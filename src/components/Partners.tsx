@@ -105,10 +105,13 @@ const Partners = () => {
                   {/* Efeito de brilho no hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/10 group-hover:via-primary/5 group-hover:to-primary/10 transition-all duration-300 pointer-events-none"></div>
                   
+                  {/* Efeito de brilho animado */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  
                   <img 
                     src={brand.logo} 
                     alt={brand.name}
-                    className="relative z-10 max-w-full max-h-14 sm:max-h-18 md:max-h-20 lg:max-h-24 object-contain opacity-70 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0 filter"
+                    className="relative z-10 max-w-full max-h-14 sm:max-h-18 md:max-h-20 lg:max-h-24 object-contain opacity-70 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0 filter group-hover:scale-110"
                     loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -122,6 +125,9 @@ const Partners = () => {
                   
                   {/* Linha decorativa no hover */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Top border no hover */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </motion.div>
               </div>
             ))}

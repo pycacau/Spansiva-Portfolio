@@ -163,7 +163,7 @@ const Contact = () => {
           >
             <form onSubmit={(e) => e.preventDefault()} className="space-y-6" noValidate>
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium">
+                <Label htmlFor="name" className="text-sm font-medium text-foreground">
                   Nome <span className="text-destructive">*</span>
                 </Label>
                 <Input
@@ -173,7 +173,7 @@ const Contact = () => {
                   placeholder="Seu nome completo"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`bg-card ${errors.name ? "border-destructive" : ""}`}
+                  className={`bg-card/80 backdrop-blur-sm border-primary/20 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.name ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "name-error" : undefined}
                   required
@@ -185,7 +185,7 @@ const Contact = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
+                <Label htmlFor="email" className="text-sm font-medium text-foreground">
                   E-mail <span className="text-destructive">*</span>
                 </Label>
                 <Input
@@ -195,7 +195,7 @@ const Contact = () => {
                   placeholder="seu@email.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`bg-card ${errors.email ? "border-destructive" : ""}`}
+                  className={`bg-card/80 backdrop-blur-sm border-primary/20 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 ${errors.email ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "email-error" : undefined}
                   required
@@ -207,7 +207,7 @@ const Contact = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-sm font-medium">
+                <Label htmlFor="message" className="text-sm font-medium text-foreground">
                   Mensagem <span className="text-destructive">*</span>
                 </Label>
                 <Textarea
@@ -217,7 +217,7 @@ const Contact = () => {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`bg-card ${errors.message ? "border-destructive" : ""}`}
+                  className={`bg-card/80 backdrop-blur-sm border-primary/20 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none ${errors.message ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? "message-error" : undefined}
                   required
@@ -232,20 +232,21 @@ const Contact = () => {
                 <Button 
                   type="button" 
                   size="lg" 
-                  className="w-full bg-green-600 hover:bg-green-700 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" 
+                  className="w-full bg-gradient-to-br from-green-600 via-green-600 to-green-700 hover:from-green-500 hover:via-green-600 hover:to-green-700 font-semibold tracking-wide shadow-lg hover:shadow-[0_8px_40px_hsl(142,71%,45%,0.5)] transition-all duration-300 hover:scale-105 group relative overflow-hidden" 
                   onClick={sendToWhatsApp}
                 >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Enviar via WhatsApp
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <MessageCircle className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="relative z-10">Enviar via WhatsApp</span>
                 </Button>
                 <Button 
                   type="button" 
                   size="lg" 
-                  className="w-full btn-premium font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" 
+                  className="w-full btn-premium font-semibold tracking-wide shadow-lg hover:shadow-[0_8px_40px_hsl(var(--primary)/0.5)] transition-all duration-300 hover:scale-105 group relative overflow-hidden" 
                   onClick={sendToEmail}
                 >
-                  <Mail className="w-5 h-5 mr-2" />
-                  Enviar via E-mail
+                  <Mail className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="relative z-10">Enviar via E-mail</span>
                 </Button>
               </div>
             </form>
@@ -268,14 +269,15 @@ const Contact = () => {
                   href="https://wa.me/558898033002"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/80 via-card/70 to-card/80 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 card-hover-glow group backdrop-blur-xl hover:shadow-lg hover:shadow-primary/20 relative overflow-hidden"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-primary/15 via-primary/10 to-primary/15 group-hover:from-primary/25 group-hover:via-primary/20 group-hover:to-primary/25 transition-all duration-300 border border-primary/20 group-hover:border-primary/40 relative z-10">
+                    <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-base sm:text-lg font-semibold text-foreground">WhatsApp</p>
-                    <p className="text-sm text-muted-foreground">+55 88 9803-3002</p>
+                  <div className="flex-1 relative z-10">
+                    <p className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">WhatsApp</p>
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">+55 88 9803-3002</p>
                   </div>
                 </a>
 
@@ -283,27 +285,29 @@ const Contact = () => {
                   href="https://instagram.com/spansiva_tec.aplicada"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/80 via-card/70 to-card/80 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 card-hover-glow group backdrop-blur-xl hover:shadow-lg hover:shadow-primary/20 relative overflow-hidden"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-primary/15 via-primary/10 to-primary/15 group-hover:from-primary/25 group-hover:via-primary/20 group-hover:to-primary/25 transition-all duration-300 border border-primary/20 group-hover:border-primary/40 relative z-10">
+                    <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-base sm:text-lg font-semibold text-foreground">Instagram</p>
-                    <p className="text-sm text-muted-foreground">@spansiva_tec.aplicada</p>
+                  <div className="flex-1 relative z-10">
+                    <p className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">Instagram</p>
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">@spansiva_tec.aplicada</p>
                   </div>
                 </a>
 
                 <a
                   href="mailto:spansivainformatica@gmail.com"
-                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/60 via-card/50 to-card/60 rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 card-hover-glow group backdrop-blur-sm hover:shadow-lg hover:shadow-primary/10"
+                  className="flex items-center gap-4 p-6 bg-gradient-to-br from-card/80 via-card/70 to-card/80 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 card-hover-glow group backdrop-blur-xl hover:shadow-lg hover:shadow-primary/20 relative overflow-hidden"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-primary/15 via-primary/10 to-primary/15 group-hover:from-primary/25 group-hover:via-primary/20 group-hover:to-primary/25 transition-all duration-300 border border-primary/20 group-hover:border-primary/40 relative z-10">
+                    <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-base sm:text-lg font-semibold text-foreground">E-mail</p>
-                    <p className="text-sm text-muted-foreground break-all">spansivainformatica@gmail.com</p>
+                  <div className="flex-1 relative z-10">
+                    <p className="text-base sm:text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">E-mail</p>
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 break-all">spansivainformatica@gmail.com</p>
                   </div>
                 </a>
               </div>

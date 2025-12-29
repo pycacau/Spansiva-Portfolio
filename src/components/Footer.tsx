@@ -9,8 +9,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-background via-card to-background border-t border-primary/20 relative overflow-hidden" role="contentinfo">
+    <footer className="bg-gradient-to-b from-background via-card/95 to-background border-t border-primary/30 relative overflow-hidden" role="contentinfo">
       <div className="absolute inset-0 tech-grid opacity-10"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
         <div className="py-10 sm:py-12 md:py-16">
@@ -39,33 +41,37 @@ const Footer = () => {
                 <li>
                   <button 
                     onClick={() => scrollToSection("hero")} 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 group relative"
                   >
-                    Sobre nós
+                    <span className="relative z-10">Sobre nós</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </button>
                 </li>
                 <li>
                   <button 
                     onClick={() => scrollToSection("services")} 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 group relative"
                   >
-                    Produtos
+                    <span className="relative z-10">Produtos</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </button>
                 </li>
                 <li>
                   <button 
                     onClick={() => scrollToSection("portfolio")} 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 group relative"
                   >
-                    Destaques
+                    <span className="relative z-10">Destaques</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </button>
                 </li>
                 <li>
                   <button 
                     onClick={() => scrollToSection("contact")} 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 group relative"
                   >
-                    Contato
+                    <span className="relative z-10">Contato</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </button>
                 </li>
               </ul>
@@ -78,19 +84,21 @@ const Footer = () => {
                 <li>
                   <a 
                     href="/termos" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center justify-center sm:justify-start gap-2 group"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <FileText className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>Termos de Uso</span>
+                    <FileText className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span className="relative z-10">Termos de Uso</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
                 <li>
                   <a 
                     href="/faq" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center justify-center sm:justify-start gap-2 group"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>Perguntas Frequentes</span>
+                    <HelpCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span className="relative z-10">Perguntas Frequentes</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
               </ul>
@@ -105,19 +113,21 @@ const Footer = () => {
                     href="https://wa.me/558898033002" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center justify-center sm:justify-start gap-2 group"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>+55 88 9803-3002</span>
+                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span className="relative z-10">+55 88 9803-3002</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
                 <li>
                   <a 
                     href="mailto:spansivainformatica@gmail.com" 
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center justify-center sm:justify-start gap-2 group break-all"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group break-all relative"
                   >
-                    <Mail className="w-4 h-4 group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-xs">spansivainformatica@gmail.com</span>
+                    <Mail className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 relative z-10" />
+                    <span className="text-xs relative z-10">spansivainformatica@gmail.com</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
                 <li>
@@ -125,10 +135,11 @@ const Footer = () => {
                     href="https://instagram.com/spansiva_tec.aplicada" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center justify-center sm:justify-start gap-2 group"
+                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-300 flex items-center justify-center sm:justify-start gap-2 group relative"
                   >
-                    <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>@spansiva_tec.aplicada</span>
+                    <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                    <span className="relative z-10">@spansiva_tec.aplicada</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
                 <li className="pt-2">
@@ -142,7 +153,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-primary/20 py-6">
+        <div className="border-t border-primary/30 py-6 relative">
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
             <p className="text-xs sm:text-sm text-muted-foreground">
               © {new Date().getFullYear()} Spansiva — Todos os direitos reservados.
@@ -153,9 +165,10 @@ const Footer = () => {
                 href="https://arturmaciel.pages.dev" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 font-semibold transition-colors duration-200 hover:underline"
+                className="text-primary hover:text-primary/80 font-semibold transition-all duration-300 hover:underline relative group"
               >
-                Artur Maciel
+                <span className="relative z-10">Artur Maciel</span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </a>
               <span>e</span>
               <span className="text-primary font-semibold">Ryan Maximus</span>

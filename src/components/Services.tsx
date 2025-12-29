@@ -69,14 +69,19 @@ const Services = () => {
                 delay: isMobile ? index * 0.05 : index * 0.1,
                 ease: "easeOut"
               }}
-              className="glass-card-premium p-4 sm:p-6 lg:p-8 xl:p-10 rounded-xl sm:rounded-2xl card-hover-glow group h-full flex flex-col"
+              className="glass-card-premium p-4 sm:p-6 lg:p-8 xl:p-10 rounded-xl sm:rounded-2xl card-hover-glow group h-full flex flex-col relative overflow-hidden"
               whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
             >
-              <div className="bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8 transition-all duration-300 border border-primary/30 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110">
-                <service.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-primary" strokeWidth={2.5} />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/3 group-hover:to-primary/5 transition-all duration-300 pointer-events-none"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 lg:mb-8 transition-all duration-300 border border-primary/30 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:scale-110 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
+                  <service.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300" strokeWidth={2.5} />
+                </div>
+                <h3 className="text-sm sm:text-base lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4 group-hover:text-primary transition-colors duration-300 leading-tight tracking-tight">{service.title}</h3>
+                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed flex-grow font-light group-hover:text-foreground/90 transition-colors duration-300">{service.description}</p>
               </div>
-              <h3 className="text-sm sm:text-base lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4 group-hover:text-primary transition-colors leading-tight tracking-tight">{service.title}</h3>
-              <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed flex-grow font-light">{service.description}</p>
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </div>
