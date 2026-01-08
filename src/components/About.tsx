@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award, Zap, ShieldCheck } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Award, Zap, ShieldCheck } from "lucide-react";
+import { SectionBackground } from "@/components/ui/section-background";
 
 const About = () => {
   const ref = useRef(null);
@@ -32,11 +32,8 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-background via-card/95 to-card relative overflow-hidden" aria-label="Sobre a empresa">
-      <div className="absolute inset-0 tech-grid opacity-20"></div>
-      <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
+    <section id="about" className="py-16 sm:py-20 md:py-24 relative overflow-hidden" aria-label="Sobre a empresa">
+      <SectionBackground variant="about" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}

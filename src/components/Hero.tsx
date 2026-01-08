@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { SectionBackground } from "@/components/ui/section-background";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -11,14 +12,8 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden grid-overlay tech-grid" aria-label="Hero section">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse tech-glow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse tech-glow" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl animate-pulse tech-glow" style={{ animationDelay: '0.5s' }}></div>
-      </div>
-
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden" aria-label="Hero section">
+      <SectionBackground variant="hero" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 sm:pt-24 md:pt-28 pb-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -37,9 +32,9 @@ const Hero = () => {
                 <img 
                   src="/logomarca.png" 
                   alt="Spansiva Logo" 
-                  className="h-24 sm:h-32 md:h-40 lg:h-48 xl:h-56 w-auto filter drop-shadow-[0_0_16px_hsl(0,100%,50%)] drop-shadow-[0_0_32px_hsl(0,100%,50%)] drop-shadow-[0_0_48px_hsl(0,100%,50%)] drop-shadow-[0_0_64px_hsl(0,100%,50%)] animate-pulse-slow"
+                  className="h-24 sm:h-32 md:h-40 lg:h-48 xl:h-56 w-auto filter drop-shadow-[0_0_4px_hsl(0,100%,50%)] drop-shadow-[0_0_8px_hsl(0,100%,50%)] animate-pulse-slow"
                 />
-                <div className="absolute inset-0 bg-primary/40 blur-3xl -z-10 rounded-full animate-pulse"></div>
+                <div className="absolute inset-0 bg-primary/10 blur-xl -z-10 rounded-full animate-pulse"></div>
               </div>
             </div>
           </motion.div>
@@ -48,7 +43,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-light tracking-wide px-4"
+            className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-light tracking-wide px-4"
           >
             PCs gamer, impressoras e acessórios premium. Tudo que você precisa para elevar sua experiência gaming ao próximo nível.
           </motion.p>

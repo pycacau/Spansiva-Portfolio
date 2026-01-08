@@ -1,26 +1,26 @@
-import Navigation from "@/components/Navigation";
+import NavigationNew from "@/components/NavigationNew";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
+import PortfolioNew from "@/components/PortfolioNew";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Testimonials from "@/components/Testimonials";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import Partners from "@/components/Partners";
-import CodeBackground from "@/components/CodeBackground";
+import { SilkBackground } from "@/components/ui/silk-background";
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden overflow-x-hidden max-w-full">
-      <CodeBackground />
-      <Navigation />
+    <div className="relative min-h-screen overflow-hidden overflow-x-hidden max-w-full bg-[#030303]">
+      <SilkBackground />
+      <NavigationNew />
       <div className="relative z-[2] overflow-x-hidden max-w-full">
         <Hero />
         <About />
         <Services />
-        <Portfolio />
+        <PortfolioNew />
         <Partners />
-        <Testimonials />
+        <TestimonialsMarquee />
         <Contact />
         <Footer />
       </div>

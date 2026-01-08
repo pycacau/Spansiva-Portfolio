@@ -9,10 +9,28 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-background via-card/95 to-background border-t border-primary/30 relative overflow-hidden" role="contentinfo">
-      <div className="absolute inset-0 tech-grid opacity-10"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <footer className="relative overflow-hidden bg-gradient-to-b from-background via-card/95 to-background border-t border-primary/30 rounded-t-3xl">
+      {/* Efeito de bolha 3D */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary/10 via-transparent to-transparent blur-xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-primary/20 via-primary/10 to-transparent blur-2xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-primary/30 via-primary/20 to-transparent blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-primary/40 via-primary/30 to-transparent blur-4xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-4 bg-gradient-to-t from-primary/50 via-primary/40 to-transparent blur-3xl"></div>
+        
+        {/* Bolhas flutuantes 3D */}
+        <div className="absolute bottom-0 left-[10%] w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-0 left-[30%] w-24 h-24 bg-primary/15 rounded-full blur-xl animate-float-delayed"></div>
+        <div className="absolute bottom-0 left-[50%] w-28 h-28 bg-primary/25 rounded-full blur-xl animate-float-delayed"></div>
+        <div className="absolute bottom-0 left-[70%] w-20 h-20 bg-primary/20 rounded-full blur-lg animate-float-delayed"></div>
+        <div className="absolute bottom-0 left-[85%] w-16 h-16 bg-primary/15 rounded-full blur-md animate-float-delayed"></div>
+        <div className="absolute bottom-0 right-[10%] w-36 h-36 bg-primary/20 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-0 right-[30%] w-28 h-28 bg-primary/25 rounded-full blur-xl animate-float-delayed"></div>
+        <div className="absolute bottom-0 right-[50%] w-24 h-24 bg-primary/15 rounded-full blur-xl animate-float-delayed"></div>
+        <div className="absolute bottom-0 right-[70%] w-20 h-20 bg-primary/20 rounded-full blur-lg animate-float-delayed"></div>
+        <div className="absolute bottom-0 right-[85%] w-16 h-16 bg-primary/15 rounded-full blur-md animate-float-delayed"></div>
+      </div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
         <div className="py-10 sm:py-12 md:py-16">
