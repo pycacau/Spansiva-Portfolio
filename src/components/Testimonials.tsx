@@ -35,10 +35,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-card relative overflow-hidden" id="testimonials" aria-label="Depoimentos de clientes">
-      <div className="absolute inset-0 tech-grid opacity-30"></div>
-      <div className="absolute top-0 right-1/3 w-56 h-56 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-primary/5 rounded-full blur-3xl"></div>
+    <section className="py-16 sm:py-20 md:py-24 bg-background relative overflow-hidden" id="testimonials" aria-label="Depoimentos de clientes">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         <motion.div 
           initial={{ opacity: 0, y: isMobile ? 20 : 30 }}

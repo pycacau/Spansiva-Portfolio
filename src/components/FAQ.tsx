@@ -61,7 +61,11 @@ const FAQ = () => {
     <div className="min-h-screen relative overflow-hidden">
       <CodeBackground />
       <section id="faq" className="min-h-screen py-20 sm:py-24 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 tech-grid opacity-20"></div>
+        {/* Efeitos visuais sutis em tom vermelho */}
+        <div className="absolute inset-0 tech-grid opacity-10"></div>
+        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-[250px] h-[250px] bg-primary/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}

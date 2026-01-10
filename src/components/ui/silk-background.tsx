@@ -19,7 +19,7 @@ export function SilkBackground({ className }: SilkBackgroundProps) {
     if (!ctx) return;
 
     let time = 0;
-    const speed = 0.02;
+    const speed = 0.002; // Reduced speed significantly to avoid "moving light" distraction
     const scale = 2;
     const noiseIntensity = 0.8;
 
@@ -75,9 +75,9 @@ export function SilkBackground({ className }: SilkBackgroundProps) {
           const intensity = Math.max(0, pattern - rnd / 15.0 * noiseIntensity);
           
           // Usar cor primária do site (vermelho puro) com intensidade equilibrada
-          const r = Math.floor(255 * intensity * 0.6); // Componente R do vermelho
-          const g = Math.floor(0 * intensity);         // Componente G do vermelho
-          const b = Math.floor(0 * intensity);         // Componente B do vermelho
+          const r = Math.floor(255 * intensity * 0.5); // Reduzido para ser mais sutil
+          const g = Math.floor(0 * intensity);         
+          const b = Math.floor(0 * intensity);         
           const a = 255;
 
           const index = (y * width + x) * 4;
@@ -97,8 +97,8 @@ export function SilkBackground({ className }: SilkBackgroundProps) {
         width / 2, height / 2, 0,
         width / 2, height / 2, Math.max(width, height) / 2
       );
-      overlayGradient.addColorStop(0, 'rgba(0, 0, 0, 0.1)');
-      overlayGradient.addColorStop(1, 'rgba(0, 0, 0, 0.4)');
+      overlayGradient.addColorStop(0, 'rgba(255, 0, 0, 0.01)'); // Muito sutil
+      overlayGradient.addColorStop(1, 'rgba(0, 0, 0, 0.6)'); // Mais escuro nas bordas
       
       ctx.fillStyle = overlayGradient;
       ctx.fillRect(0, 0, width, height);
@@ -122,11 +122,11 @@ export function SilkBackground({ className }: SilkBackgroundProps) {
       <canvas 
         ref={canvasRef}
         className="absolute inset-0 w-full h-full z-0"
-        style={{ opacity: 0.4 }}
+        style={{ opacity: 0.3 }} // Reduzido para 0.3
       />
       
       {/* Gradient Overlay para melhor integração */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
     </div>
   );
 }

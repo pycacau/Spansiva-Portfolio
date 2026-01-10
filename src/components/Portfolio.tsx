@@ -1,14 +1,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const Portfolio = () => {
   const ref = useRef(null);
-  const isMobile = useIsMobile();
   const isInView = useInView(ref, { 
     once: true, 
-    amount: isMobile ? 0.1 : 0.2,
+    amount: 0.2,
     margin: "0px 0px -100px 0px"
   });
 
@@ -46,11 +44,12 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-card via-card/95 to-background relative overflow-hidden" aria-label="Produtos em destaque">
-      <div className="absolute inset-0 tech-grid opacity-20"></div>
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+    <section id="portfolio" className="py-16 sm:py-20 md:py-24 bg-background relative overflow-hidden" aria-label="Produtos em destaque">
+      {/* Efeitos visuais sutis em tom vermelho */}
+      <div className="absolute inset-0 tech-grid opacity-10"></div>
+      <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[250px] h-[250px] bg-primary/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -62,12 +61,12 @@ const Portfolio = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">
             Produtos em <span className="text-gradient">Destaque</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 leading-relaxed font-light tracking-wide">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Confira alguns dos nossos produtos gamers mais populares
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {portfolioItems.map((item, index) => {
             const [imageError, setImageError] = useState(false);
             const [isHovered, setIsHovered] = useState(false);
@@ -75,13 +74,6 @@ const Portfolio = () => {
             const [displayedTitle, setDisplayedTitle] = useState("");
             
             useEffect(() => {
-              if (isMobile) {
-                // Em mobile, sempre mostrar informações completas
-                setDisplayedCategory(item.category);
-                setDisplayedTitle(item.title);
-                return;
-              }
-
               if (isHovered) {
                 // Reset
                 setDisplayedCategory("");
@@ -118,35 +110,42 @@ const Portfolio = () => {
                 setDisplayedCategory("");
                 setDisplayedTitle("");
               }
-            }, [isHovered, item.category, item.title, isMobile]);
+            }, [isHovered, item.category, item.title]);
             
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ 
-                  duration: isMobile ? 0.4 : 0.5, 
-                  delay: isMobile ? index * 0.05 : index * 0.08,
-                  ease: "easeOut"
+                  duration: 0.7, 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15
                 }}
-                onHoverStart={() => !isMobile && setIsHovered(true)}
-                onHoverEnd={() => !isMobile && setIsHovered(false)}
-                className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 glass-card-premium cursor-pointer card-hover-glow"
-                whileHover={!isMobile ? { y: -6, scale: 1.02 } : {}}
+                whileHover={{ y: -12, scale: 1.03, rotateY: 2 }}
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
+                className="group relative overflow-hidden rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-700 card-hover-glow glass-card cursor-pointer backdrop-blur-md shadow-xl shadow-primary/10 hover:shadow-primary/30"
                 role="article"
                 aria-label={`Produto: ${item.title}`}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/3 group-hover:to-primary/5 transition-all duration-300 pointer-events-none z-10"></div>
                 <div className="aspect-video overflow-hidden bg-gradient-to-br from-muted/80 via-muted/60 to-muted/40 relative">
                   {!imageError ? (
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={`${item.title} - ${item.category}`}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
                       onError={() => setImageError(true)}
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ 
+                        duration: 0.8, 
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10">
@@ -157,23 +156,22 @@ const Portfolio = () => {
                     </div>
                   )}
                 </div>
-                {/* Informações sempre visíveis em mobile, animadas em desktop */}
-                <div className="absolute inset-0 flex items-end p-3 sm:p-4 lg:p-6 pointer-events-none bg-gradient-to-t from-background/95 via-background/80 to-transparent">
+                <div className="absolute inset-0 flex items-end p-4 sm:p-6 pointer-events-none">
                   <motion.div
-                    initial={isMobile ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-                    animate={isMobile || isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <p className="text-primary text-xs font-semibold mb-1 sm:mb-2 uppercase tracking-wide">
-                      {isMobile ? item.category : displayedCategory}
-                      {!isMobile && isHovered && displayedCategory.length < item.category.length && (
+                    <p className="text-primary text-xs sm:text-sm font-semibold mb-2 uppercase tracking-wide">
+                      {displayedCategory}
+                      {isHovered && displayedCategory.length < item.category.length && (
                         <span className="animate-pulse">|</span>
                       )}
                     </p>
-                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-foreground line-clamp-2">
-                      {isMobile ? item.title : displayedTitle}
-                      {!isMobile && isHovered && displayedTitle.length < item.title.length && (
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
+                      {displayedTitle}
+                      {isHovered && displayedTitle.length < item.title.length && (
                         <span className="animate-pulse">|</span>
                       )}
                     </h3>
